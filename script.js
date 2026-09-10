@@ -1,6 +1,7 @@
 // This is the boilerplate code given for you
 // You can modify this code
 // Product data
+window.sessionStorage.clear();
 const products = [
   { id: 1, name: "Product 1", price: 10 },
   { id: 2, name: "Product 2", price: 20 },
@@ -46,8 +47,8 @@ function renderCart() {
 // Add item to cart
 function addToCart(productId) {
 	const product = products.find(p => p.id === productId);
-  if (!cartItems.some(item => item.id === productId)) {
-    cartItems.push(product);
+	  if (!cartItems.some(item => item.id === productId)) {
+	    cartItems.push(product);
     renderCart();
   }
 }
