@@ -45,8 +45,11 @@ function renderCart() {
 
 // Add item to cart
 function addToCart(productId) {
-	cartItems.push(products[productId-1]);
-	renderCart();
+	const product = products.find(p => p.id === productId);
+  if (!cartItems.some(item => item.id === productId)) {
+    cartItems.push(product);
+    renderCart();
+  }
 }
 
 // Remove item from cart
