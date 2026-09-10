@@ -49,16 +49,16 @@ function renderCart() {
 // Add item to cart
 function addToCart(productId) {
 	// 1. Find product using standard database lookup or boilerplate array index fallback
-	const product = products.find(p => p.id === productId) || products[productId - 1];
+	// const product = products.find(p => p.id === productId) || products[productId - 1];
 	
-	if (product) {
-		cartItems.push(product);
+	// if (product) {
+		cartItems.push(products[productId]);
 		
 		// 2. Save the updated array directly to sessionStorage immediately
 		window.sessionStorage.setItem("cartItems", JSON.stringify(cartItems));
 		
 		renderCart();
-	}
+	
 }
 
 // Remove item from cart
