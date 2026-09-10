@@ -1,7 +1,6 @@
 // This is the boilerplate code given for you
 // You can modify this code
 // Product data
-window.sessionStorage.clear();
 const products = [
   { id: 1, name: "Product 1", price: 10 },
   { id: 2, name: "Product 2", price: 20 },
@@ -10,9 +9,7 @@ const products = [
   { id: 5, name: "Product 5", price: 50 },
 ];
 
-// Change this line near the top of your script:
-let cartItems = JSON.parse(window.sessionStorage.getItem("cartItems")) || [];
-
+let cartItems = JSON.parse(sessionStorage.getItem("cart")) || [];
 
 // DOM elements
 const productList = document.getElementById("product-list");
@@ -42,42 +39,27 @@ function renderCart() {
 	Remove From Cart
 	</button>`;
 		cartList.appendChild(li);
-		window.sessionStorage.setItem('cart', JSON.stringify(cartItems));
 	});
 }
 
 // Add item to cart
 function addToCart(productId) {
-	// 1. Find product using standard database lookup or boilerplate array index fallback
-	// const product = products.find(p => p.id === productId) || products[productId - 1];
-	
-	// if (product) {
-		cartItems.push(products[productId]);
-		
-		// 2. Save the updated array directly to sessionStorage immediately
-		window.sessionStorage.setItem("cartItems", JSON.stringify(cartItems));
-		
-		renderCart();
-	
+	cartItems.push(products[productId-1]);
+    renderCart();
+  
 }
 
 // Remove item from cart
 function removeFromCart(productId) {
-	// Use filter or splice depending on test expectations
 	cartItems = cartItems.filter(item => item.id !== productId);
-	
-	// Save the updated array directly to sessionStorage immediately
-	window.sessionStorage.setItem("cartItems", JSON.stringify(cartItems));
-	
-	renderCart();
+    renderCart();
 }
-
 
 // Clear cart
 function clearCart() {
-	window.sessionStorage.clear();
-	cartItems = [];
-	cartList.innerHTML = "";
+    cartItems = [];
+    sessionStorage.setItem("cart", JSON.stringify(cartItems));
+    renderCart();
 }
 
 // Initial render
